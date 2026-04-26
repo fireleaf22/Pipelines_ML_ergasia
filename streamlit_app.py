@@ -5,5 +5,11 @@ st.title('ML App')
 
 st.info('This is the App for the project')
 
-df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/Video_Games_Sales_Cleaned.csv')
-df
+with st.expander('Data'):
+  st.write('**Raw Dataset**')
+  df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/Video_Games_Sales_Cleaned.csv')
+  df
+
+
+with st.expander('Chart')
+  st.bar_chart(df, x="release_year", y="total_sales", color="genre", stack=False)
