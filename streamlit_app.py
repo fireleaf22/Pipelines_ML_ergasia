@@ -11,6 +11,13 @@ with st.expander('Data'):
   df
 
 
-#with st.expander('Chart'):
+with st.expander('Chart'):
   #st.bar_chart(df, x="critic_score", y="total_sales", stack=False)
   #st.bar_chart(df, x="critic_score", y="total_sales", color="genre", horizontal=True)
+  st.scatter_chart(
+    df,
+    x="total_sales",
+    y="critic_score",
+    color="genre",
+    size="release_year",
+  )
