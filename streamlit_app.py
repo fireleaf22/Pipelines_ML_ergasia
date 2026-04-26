@@ -13,5 +13,5 @@ with st.expander('Data'):
 
 with st.expander('Chart'):
   st.area_chart(df, x="age", y="reels_watch_time_hours", color="stress_level")
-  )
+  
 
