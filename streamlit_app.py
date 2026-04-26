@@ -12,11 +12,12 @@ with st.expander('Data'):
 
 
 with st.expander('Chart'):
-  st.line_chart(
+  st.bar_chart(
     df,
     x="G3",
     y="studytime",
     color="sex",
+    horizontal=True
 )
   
 
