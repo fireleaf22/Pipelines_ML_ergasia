@@ -14,9 +14,9 @@ with st.expander('Data'):
 with st.expander('Chart'):
   st.scatter_chart(
     df,
-    x="reels_watch_time_hours",
+    x="attention_span_score",
     y="task_completion_rate",
     color="focus_level",
-    size="age",
+    size="reels_watch_time_hours",
   )
 
