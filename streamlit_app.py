@@ -12,13 +12,13 @@ with st.expander('Data'):
 
 
 with st.expander('Chart'):
-  #st.bar_chart(df, x="critic_score", y="total_sales", stack=False)
+  st.bar_chart(df, x="reels_watch_time_hours", y="task_completion_ra", stack=False)
   #st.bar_chart(df, x="critic_score", y="total_sales", color="genre", horizontal=True)
-  st.scatter_chart(
-    df,
-    x="reels_watch_time_hours",
-    y="task_completion_ra",
-  )
+  # st.scatter_chart(
+  #   df,
+  #   x="reels_watch_time_hours",
+  #   y="task_completion_ra",
+  # )
 
 #Data preperations
 #with st.
