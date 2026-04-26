@@ -19,5 +19,4 @@ with st.expander('Chart'):
     x="total_sales",
     y="critic_score",
     color="genre",
-    size="release_year",
   )
