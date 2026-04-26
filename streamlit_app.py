@@ -18,8 +18,8 @@ with st.expander('Chart'):
     df,
     x="reels_watch_time_hours",
     y="task_completion_ra",
+    size="age",
     color="stress_level",
-    size="age"
   )
 
 #Data preperations
