@@ -15,7 +15,7 @@ with st.expander('Chart'):
   st.line_chart(
     df,
     x="G3",
-    y=["studytime","schoolsup"],
+    y="studytime",
     color="sex",
 )
   
