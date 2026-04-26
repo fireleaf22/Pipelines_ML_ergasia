@@ -19,7 +19,7 @@ with st.expander('Chart'):
     x="reels_watch_time_hours",
     y="task_completion_ra",
     color="stress_level",
-    size="age",
+    size="age"
   )
 
 #Data preperations
