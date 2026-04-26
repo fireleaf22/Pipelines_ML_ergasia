@@ -12,4 +12,4 @@ with st.expander('Data'):
 
 
 with st.expander('Chart'):
-  st.bar_chart(df, x="release_year", y="total_sales", color="genre", stack=False)
+  st.bar_chart(df, x="genre", y="total_sales", color="release_year", stack=False)
