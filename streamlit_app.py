@@ -12,12 +12,11 @@ with st.expander('Data'):
 
 
 with st.expander('Chart'):
-  st.scatter_chart(
+  st.line_chart(
     df,
-    x="studytime",
-    y="G3",
-    color="schoolsup",
-    size="sex",
+    x="G3",
+    y=["studytime","schoolsup"],
+    color="sex",
 )
   
 
