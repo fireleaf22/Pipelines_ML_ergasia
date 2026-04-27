@@ -13,14 +13,14 @@ st.info('This is the App for the project')
 df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
 
 df_columns = list(df.columns)
-target_input = st.selectbox('select target',df_columns)
+selected = st.selectbox('select target',df_columns)
+target_input = df.selected
 
 #target = pd.DataFrame(target_input, index=[0])
 
 ##Data preparations
 #Create sidebar for data input
 with st.sidebar:
-  target_input
   st.header("Input features")
   sex = st.selectbox("sex",("F","M"))
   age = st.slider("age",15,22,18)
@@ -73,8 +73,6 @@ with st.sidebar:
          }
   input_df = pd.DataFrame(data, index=[0])
   input_features = pd.concat([input_df,df], axis=0)
-  st.write('**TEST**')
-    input_features
 
 #Show input data
 with st.expander('Input Data'):
@@ -91,7 +89,7 @@ with st.expander('Data'):
   Features
 
   st.write('**Target**')
-  Target = input_features.(target_input, axis=1)
+  Target = input_features.target_input
   Target
 
 #Show Charts for the data---------add more charts
