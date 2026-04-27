@@ -86,7 +86,9 @@ with st.sidebar:
   input_df = pd.DataFrame(data, index=[0])
   input_features = pd.concat([input_df,Features], axis=0)
 
-input_df
+
+with st.expander('Input Data'):
+  input_df
 #input_features
 
 
