@@ -67,7 +67,7 @@ with st.sidebar:
           'absences': absences,
           'G1': G1,
           'G2': G2,
-          'G3': G3
+          'G3': G3,
          }
   input_df = pd.DataFrame(data, index=[0])
   input_features = pd.concat([input_df,df], axis=0)
@@ -107,29 +107,29 @@ with st.expander('Charts'):
 
 ##Encoding
 #Encode Features
-#encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
-#          'activities', 'nursery', 'higher', 'internet', 'romantic']
-#df_features = pd.get_dummies(input_features, prefix=encode)
-#encoded_freatures = df_features[1:]
-#input_row = df_features[:1]
+encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
+          'activities', 'nursery', 'higher', 'internet', 'romantic']
+df_features = pd.get_dummies(input_features, prefix=encode)
+encoded_freatures = df_features[1:]
+input_row = df_features[:1]
 
 #Encode Target (not needed at the moment)
 
 #Model training
-#clf = RandomForestClassifier()
-#clf.fit(encoded_freatures, Target) #encoded target if needed
+clf = RandomForestClassifier()
+clf.fit(encoded_freatures, Target) #encoded target if needed
 
 #Apply model for predictions
-#prediction = clf.predict(input_row)
-#prediction_proba = clf.predict_proba(input_row)
+prediction = clf.predict(input_row)
+prediction_proba = clf.predict_proba(input_row)
 
 
 #Predictions
-#with st.expander('Predictions'):
-#  st.write('**Probabilities**')
-#  prediction_proba
-#  st.write('**Final Prediction**')
-#  prediction
+with st.expander('Predictions'):
+  st.write('**Probabilities**')
+  prediction_proba
+  st.write('**Final Prediction**')
+  prediction
 
 
 
