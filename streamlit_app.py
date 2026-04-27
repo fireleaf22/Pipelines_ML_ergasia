@@ -82,7 +82,7 @@ with st.sidebar:
           'G3',G3}
   input_df = pd.DataFrame(data, index=[0])
 
-input_df
+#input_df
 
 
 
