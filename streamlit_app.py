@@ -9,21 +9,22 @@ st.title('ML App')
 
 st.info('This is the App for the project')
 
+#Read Dataset
+df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
+
+df_columns = list(df.columns)
+target_input = st.selectbox('select target',df_columns)
 ##Info Show
 #Show Dataset
 with st.expander('Data'):
   st.write('**Raw Dataset**')
-  #Read Dataset
-  df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
   df
-  df_columns = list(df.columns.values)
 
   st.write('**Features**')
-  Features = df.drop('G3', axis=1)
+  Features = df.drop('target_input', axis=1)
   Features
 
   st.write('**Target**')
-  target_input = st.selectbox(df_columns)
   Target = df.target_input
   Target
 
