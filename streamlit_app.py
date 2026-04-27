@@ -35,7 +35,7 @@ with st.sidebar:
   sex = st.selectbox("sex",("F","M"))
   age = st.slider("age",15,22,18)
   famsize = st.selectbox("Family members (3+/3-)",("GT3","LE3"))
-  Pstatus = st.selectbox("Parents together?",("A","T"))
+  Pstatus = st.selectbox("Parents (apart/together)",("A","T"))
   Medu = st.slider("mom's education",0,4,2)
   Fedu = st.slider("dad's education",0,4,2)
   studytime = st.slider("study time",1,4,2)
@@ -55,5 +55,34 @@ with st.sidebar:
   G1 = st.slider("Grade1",0,20,10)
   G2 = st.slider("Grade2",0,20,10)
   G3 = st.slider("Grade3",0,20,10)
+
+  #create dataframe for input
+  data = {'sex', sex,
+          'age', age,
+          'famsize', famsize,
+          'Pstatus', Pstatus,
+          'Medu', Medu,
+          'Fedu', Fedu,
+          'studytime', studytime,
+          'failures', failures,
+          'schoolsup', schoolsup,
+          'famsup', famsup,
+          'paid', paid,
+          'activities', activities,
+          'nursery',nursery,
+          'higher',higher,
+          'internet',internet,
+          'romantic',romantic,
+          'freetime',freetime,
+          'goout',goout,
+          'health',health,
+          'absences',absences,
+          'G1',G1,
+          'G2',G2,
+          'G3',G3}
+  input_df = pd.DataFrame(data, index=[0])
+
+input_df
+
 
 
