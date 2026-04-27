@@ -25,7 +25,7 @@ with st.expander('Data'):
   Features
 
   st.write('**Target**')
-  Target = df.target_input
+  Target = target_input
   Target
 
 #Show Charts for the data---------add more charts
