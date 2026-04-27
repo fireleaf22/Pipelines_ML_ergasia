@@ -10,13 +10,13 @@ with st.expander('Data'):
   df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
   df
 
-  st.write('**X**')
-  X = df.drop('G3', axis=1)
-  X
+  st.write('**Features**')
+  Features = df.drop('G3', axis=1)
+  Features
 
-  st.write('**Y**')
-  Y = df.G3
-  Y
+  st.write('**Target**')
+  Target = df.G3
+  Target
 
 
 with st.expander('Chart'):
@@ -54,35 +54,37 @@ with st.sidebar:
   absences = st.slider("absences",0,32,10)
   G1 = st.slider("Grade1",0,20,10)
   G2 = st.slider("Grade2",0,20,10)
-  G3 = st.slider("Grade3",0,20,10)
+  #G3 = st.slider("Grade3",0,20,10)
 
   #create dataframe for input
-  data = {'sex', sex,
-          'age', age,
-          'famsize', famsize,
-          'Pstatus', Pstatus,
-          'Medu', Medu,
-          'Fedu', Fedu,
-          'studytime', studytime,
-          'failures', failures,
-          'schoolsup', schoolsup,
-          'famsup', famsup,
-          'paid', paid,
-          'activities', activities,
-          'nursery',nursery,
-          'higher',higher,
-          'internet',internet,
-          'romantic',romantic,
-          'freetime',freetime,
-          'goout',goout,
-          'health',health,
-          'absences',absences,
-          'G1',G1,
-          'G2',G2,
-          'G3',G3}
+  data = {'sex': sex,
+          'age': age,
+          'famsize': famsize,
+          'Pstatus': Pstatus,
+          'Medu': Medu,
+          'Fedu': Fedu,
+          'studytime': studytime,
+          'failures': failures,
+          'schoolsup': schoolsup,
+          'famsup': famsup,
+          'paid': paid,
+          'activities': activities,
+          'nursery': nursery,
+          'higher': higher,
+          'internet': internet,
+          'romantic': romantic,
+          'freetime': freetime,
+          'goout': goout,
+          'health': health,
+          'absences': absences,
+          'G1': G1,
+          'G2': G2,
+          #'G3': G3
+         }
   input_df = pd.DataFrame(data, index=[0])
+  input_features = pd.concat([input_df,Features], axis=0)
 
-#input_df
+input_features
 
 
 
