@@ -71,7 +71,8 @@ with st.sidebar:
          }
   input_df = pd.DataFrame(data, index=[0])
   input_features = pd.concat([input_df,df], axis=0)
-  input_features
+  st.write('**TEST**')
+    input_features
 
 #Show input data
 with st.expander('Input Data'):
