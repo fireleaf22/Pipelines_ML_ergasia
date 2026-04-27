@@ -89,7 +89,7 @@ with st.expander('Data'):
   Features
 
   st.write('**Target**')
-  Target = input_features.target_input
+  Target = input_features.G3
   Target
 
 #Show Charts for the data---------add more charts
