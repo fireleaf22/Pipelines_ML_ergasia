@@ -85,5 +85,14 @@ with st.sidebar:
   input_features = pd.concat([input_df,Features], axis=0)
 
 input_df
+#input_features
+
+
+#Encode
+encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
+          'activities', 'nursery', 'higher', 'internet', 'romantic']
+df_features = pd.get_dummies(input_features, prefix=encode)
+df_features[:1]
+
 
 
