@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
 
 st.title('ML App')
 
@@ -88,11 +89,28 @@ input_df
 #input_features
 
 
-#Encode
+#Encode Features
 encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
           'activities', 'nursery', 'higher', 'internet', 'romantic']
 df_features = pd.get_dummies(input_features, prefix=encode)
-df_features[:1]
+encoded_freatures = df_features[1:]
+input_row = df_features[:1]
+
+#Encode Target (not needed at the moment)
+
+#Model training
+clf = RandomForestClassifier()
+clf.fit(encoded_freatures, Target) #encoded target if needed
+
+#Apply model for predictions
+prediction = clf.predict(input_row)
+prediction_proba = clf.predict_proba(input_row)
+
+prediction_proba
+
+
+
+
 
 
 
