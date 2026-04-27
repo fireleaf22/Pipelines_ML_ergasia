@@ -107,10 +107,10 @@ prediction = clf.predict(input_row)
 prediction_proba = clf.predict_proba(input_row)
 
 df_prediction_proba = pd.DataFrame(prediction_proba)
-df_prediction_proba.columns = ['Adelie', 'Chinstrap', 'Gentoo']
-df_prediction_proba.rename(columns={0: '0',1: '1', 2: '5',3:'6',4:'7',5:'8',
-                                   6: '9',7: '10', 8: '11',9:'12', 10:'13',11:'14',
-                                   12: '15',13: '16', 14: '17',15:'18',16:'19'})
+df_prediction_proba.columns = [0-17]
+df_prediction_proba.rename(columns={0: '0', 1: '1', 2: '5', 3:'6', 4:'7', 5:'8',
+                                   6: '9', 7: '10', 8: '11', 9:'12', 10:'13', 11:'14',
+                                   12: '15', 13: '16', 14: '17', 15:'18', 16:'19'})
 
 prediction_proba
 
