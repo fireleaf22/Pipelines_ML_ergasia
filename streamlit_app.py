@@ -14,12 +14,13 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 
 df_columns = list(df.columns)
 target_input = st.selectbox('select target',df_columns)
-target_input
+
 #target = pd.DataFrame(target_input, index=[0])
 
 ##Data preparations
 #Create sidebar for data input
 with st.sidebar:
+  target_input
   st.header("Input features")
   sex = st.selectbox("sex",("F","M"))
   age = st.slider("age",15,22,18)
