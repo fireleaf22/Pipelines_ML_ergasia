@@ -1,4 +1,5 @@
 import streamlit as st
+import numpy
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
@@ -107,8 +108,12 @@ prediction = clf.predict(input_row)
 prediction_proba = clf.predict_proba(input_row)
 
 
-prediction_proba
-prediction
+#Predictions
+with st.expander('Predictions'):
+  st.write('**Probabilities**')
+  prediction_proba
+  st.write('**Prediction**')
+  prediction
 
 
 
