@@ -21,7 +21,7 @@ with st.expander('Data'):
   df
 
   st.write('**Features**')
-  Features = df.drop('target_input', axis=1)
+  Features = df.drop(target_input, axis=1)
   Features
 
   st.write('**Target**')
