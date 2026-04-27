@@ -53,9 +53,9 @@ with st.sidebar:
   goout = st.slider("goes out",1,5,3)
   health = st.slider("health",1,5,3)
   absences = st.slider("absences",0,32,10)
-  G1 = st.slider("Grade1",0,20,10)
-  G2 = st.slider("Grade2",0,20,10)
-  #G3 = st.slider("Grade3",0,20,10)
+  G1 = st.slider("Grade1",0,19,10)
+  G2 = st.slider("Grade2",0,19,10)
+  #G3 = st.slider("Grade3",0,19,10)
 
   #create dataframe for input
   data = {'sex': sex,
@@ -105,6 +105,12 @@ clf.fit(encoded_freatures, Target) #encoded target if needed
 #Apply model for predictions
 prediction = clf.predict(input_row)
 prediction_proba = clf.predict_proba(input_row)
+
+df_prediction_proba = pd.DataFrame(prediction_proba)
+df_prediction_proba.columns = ['Adelie', 'Chinstrap', 'Gentoo']
+df_prediction_proba.rename(columns={0: '0',1: '1', 2: '5',3:'6',4:'7',5:'8',
+                                   6: '9',7: '10', 8: '11',9:'12', 10:'13',11:'14',
+                                   12: '15',13: '16', 14: '17',15:'18',16:'19'})
 
 prediction_proba
 
