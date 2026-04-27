@@ -112,14 +112,3 @@ encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
 df_features = pd.get_dummies(input_features, prefix=encode)
 encoded_freatures = df_features[1:]
 input_row = df_features[:1]
-
-#Encode Target (not needed at the moment)
-
-
-
-
-
-
-
-
-
