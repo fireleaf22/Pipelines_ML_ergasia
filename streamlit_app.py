@@ -14,33 +14,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 
 df_columns = list(df.columns)
 target_input = st.selectbox('select target',df_columns)
-fc = df(target_input).tolist()
-fc
-##Info Show
-#Show Dataset
-with st.expander('Data'):
-  st.write('**Raw Dataset**')
-  df
-  fc
-
-  st.write('**Features**')
-  Features = df.drop(target_input, axis=1)
-  Features
-
-  st.write('**Target**')
-  Target = df.fc
-  Target
-
-#Show Charts for the data---------add more charts
-with st.expander('Charts'):
-  st.bar_chart(
-    df,
-    x="G3",
-    y="studytime",
-    color="sex",
-    horizontal=True
-)
-  
+#target = pd.DataFrame(target_input, index=[0])
 
 ##Data preparations
 #Create sidebar for data input
@@ -68,7 +42,7 @@ with st.sidebar:
   absences = st.slider("absences",0,32,10)
   G1 = st.slider("Grade1",0,19,10)
   G2 = st.slider("Grade2",0,19,10)
-  #G3 = st.slider("Grade3",0,19,10)
+  G3 = st.slider("Grade3",0,19,10)
 
   #create dataframe for input
   data = {'sex': sex,
@@ -93,15 +67,41 @@ with st.sidebar:
           'absences': absences,
           'G1': G1,
           'G2': G2,
-          #'G3': G3
+          'G3': G3
          }
   input_df = pd.DataFrame(data, index=[0])
-  input_features = pd.concat([input_df,Features], axis=0)
+  input_features = pd.concat([input_df,df], axis=0)
 
 #Show input data
 with st.expander('Input Data'):
   input_df
 #input_features
+##Info Show
+#Show Dataset
+with st.expander('Data'):
+  st.write('**Raw Dataset**')
+  df
+
+  st.write('**Features**')
+  Features = input_features.drop(target_input, axis=1)
+  Features
+
+  st.write('**Target**')
+  Target = input_features.target_input
+  Target
+
+#Show Charts for the data---------add more charts
+with st.expander('Charts'):
+  st.bar_chart(
+    df,
+    x="G3",
+    y="studytime",
+    color="sex",
+    horizontal=True
+)
+  
+
+
 
 ##Encoding
 #Encode Features
