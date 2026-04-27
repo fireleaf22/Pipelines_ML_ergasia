@@ -32,7 +32,7 @@ with st.expander('Chart'):
 #Data preparations
 with st.sidebar:
   st.header('Input features')
-  sex = st.selectbox('sex'('F','M'))
+  sex = st.selectbox("sex"('F','M'))
   age = st.slider('age',15,22,18)
   famsize = st.selectbox('Family members'('GT3','LE3'))
   Pstatus = st.selectbox('Parents: together?'('A','T'))
