@@ -14,7 +14,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 
 df_columns = list(df.columns)
 target_input = st.selectbox('select target',df_columns)
-fc = df[target_input].tolist()
+fc = df[(target_input)].tolist()
 fc
 ##Info Show
 #Show Dataset
