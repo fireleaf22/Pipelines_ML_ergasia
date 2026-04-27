@@ -14,6 +14,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 
 df_columns = list(df.columns)
 target_input = st.selectbox('select target',df_columns)
+fc = df[target_input].tolist()
 ##Info Show
 #Show Dataset
 with st.expander('Data'):
@@ -25,7 +26,7 @@ with st.expander('Data'):
   Features
 
   st.write('**Target**')
-  Target = target_input
+  Target = df.fc
   Target
 
 #Show Charts for the data---------add more charts
