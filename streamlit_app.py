@@ -1,14 +1,19 @@
+#import libraries
 import streamlit as st
 import numpy
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
+#App title
 st.title('ML App')
 
 st.info('This is the App for the project')
 
+##Info Show
+#Show Dataset
 with st.expander('Data'):
   st.write('**Raw Dataset**')
+  #Read Dataset
   df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
   df
 
@@ -17,11 +22,12 @@ with st.expander('Data'):
   Features
 
   st.write('**Target**')
-  Target = df.G3
+  target_input = st.selectbox(list(df.columns.values))
+  Target = df.target_input
   Target
 
-
-with st.expander('Chart'):
+#Show Charts for the data---------add more charts
+with st.expander('Charts'):
   st.bar_chart(
     df,
     x="G3",
@@ -31,7 +37,8 @@ with st.expander('Chart'):
 )
   
 
-#Data preparations
+##Data preparations
+#Create sidebar for data input
 with st.sidebar:
   st.header("Input features")
   sex = st.selectbox("sex",("F","M"))
@@ -86,12 +93,12 @@ with st.sidebar:
   input_df = pd.DataFrame(data, index=[0])
   input_features = pd.concat([input_df,Features], axis=0)
 
-
+#Show input data
 with st.expander('Input Data'):
   input_df
 #input_features
 
-
+##Encoding
 #Encode Features
 encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
           'activities', 'nursery', 'higher', 'internet', 'romantic']
