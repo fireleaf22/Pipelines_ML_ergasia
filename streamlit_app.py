@@ -16,13 +16,14 @@ with st.expander('Data'):
   #Read Dataset
   df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
   df
+  df_columns = list(df.columns.values)
 
   st.write('**Features**')
   Features = df.drop('G3', axis=1)
   Features
 
   st.write('**Target**')
-  target_input = st.selectbox(list(df.columns.values))
+  target_input = st.selectbox(df_columns)
   Target = df.target_input
   Target
 
