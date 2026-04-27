@@ -21,6 +21,7 @@ fc
 with st.expander('Data'):
   st.write('**Raw Dataset**')
   df
+  fc
 
   st.write('**Features**')
   Features = df.drop(target_input, axis=1)
