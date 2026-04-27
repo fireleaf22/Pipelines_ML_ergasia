@@ -114,7 +114,7 @@ prediction_proba = clf.predict_proba(input_row)
 with st.expander('Predictions'):
   st.write('**Probabilities**')
   prediction_proba
-  st.write('**Prediction**')
+  st.write('**Final Prediction**')
   prediction
 
 
