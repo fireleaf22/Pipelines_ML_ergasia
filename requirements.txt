@@ -2,3 +2,6 @@ streamlit
 numpy #numerical processing
 pandas #data
 scikit-learn #machine learning
+matplotlib
+seaborn
+joblib
