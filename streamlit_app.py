@@ -121,9 +121,9 @@ with st.expander('Charts'):
 #Encode Features
 encode_categ = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
           'activities', 'nursery', 'higher', 'internet', 'romantic']
-df_features = pd.get_dummies(Features, prefix=encode_categ)
-encoded_freatures = df_features[1:]
-input_row = df_features[:1]
+#df_features = pd.get_dummies(Features, prefix=encode_categ)
+#encoded_freatures = df_features[1:]
+#input_row = df_features[:1]
 
 encode_num = ['age','Medu','Fedu','studytime','failures','freetime','goout','health','absences','G1','G2','G3']
 
