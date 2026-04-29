@@ -124,19 +124,19 @@ input_row = df_features[:1]
 
 
 #Model training
-#clf = RandomForestClassifier()
-#clf.fit(encoded_freatures, Target) #encoded target if needed
+clf = RandomForestClassifier()
+clf.fit(encoded_freatures, target_input) #encoded target if needed
 
-#Apply model for predictions
-#prediction = clf.predict(input_row)
-#prediction_proba = clf.predict_proba(input_row)
+Apply model for predictions
+prediction = clf.predict(input_row)
+prediction_proba = clf.predict_proba(input_row)
 
 
 #Predictions
-#with st.expander('Predictions'):
-#  st.write('**Probabilities**')
-#  prediction_proba
-#  st.write('**Final Prediction**')
-#  prediction
+with st.expander('Predictions'):
+  st.write('**Probabilities**')
+  prediction_proba
+  st.write('**Final Prediction**')
+  prediction
 
 
