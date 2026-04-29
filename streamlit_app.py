@@ -15,7 +15,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 df_columns = list(df.columns)
 #target_input = st.selectbox('select target',df_columns)
 target_input = df.G3
-
+target_input
 ##Data preparations
 #Create sidebar for data input
 with st.sidebar:
