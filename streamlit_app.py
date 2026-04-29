@@ -127,7 +127,7 @@ input_row = df_features[:1]
 clf = RandomForestClassifier()
 clf.fit(encoded_freatures, target_input) #encoded target if needed
 
-Apply model for predictions
+#Apply model for predictions
 prediction = clf.predict(input_row)
 prediction_proba = clf.predict_proba(input_row)
 
