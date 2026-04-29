@@ -13,7 +13,7 @@ st.info('This is the App for the project')
 df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_ergasia/refs/heads/master/student-por.csv')
 
 df_columns = list(df.columns)
-selected = st.selectbox('select target',df_columns)
+target_input = st.selectbox('select target',df_columns)
 #target_input = df.selected
 
 #target = pd.DataFrame(target_input, index=[0])
