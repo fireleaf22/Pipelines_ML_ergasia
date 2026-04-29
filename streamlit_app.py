@@ -89,7 +89,8 @@ with st.expander('Data'):
 
   st.write('**Target**')
   #target_input
-  G3
+  target = df.G3
+  target
 
 #Show Charts for the data---------add more charts
 with st.expander('Charts'):
