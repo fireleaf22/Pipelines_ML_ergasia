@@ -109,7 +109,7 @@ with st.expander('Charts'):
 #Encode Features
 encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
           'activities', 'nursery', 'higher', 'internet', 'romantic']
-df_features = pd.get_dummies(input_features, prefix=encode)
+df_features = pd.get_dummies(Features, prefix=encode)
 encoded_freatures = df_features[1:]
 input_row = df_features[:1]
 
