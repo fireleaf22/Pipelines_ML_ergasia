@@ -14,7 +14,6 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 
 df_columns = list(df.columns)
 target_input = st.selectbox('select target',df_columns)
-#target_input = df.selected
 
 #target = pd.DataFrame(target_input, index=[0])
 
@@ -112,3 +111,32 @@ encode = ['sex', 'famsize', 'Pstatus', 'schoolsup', 'famsup', 'paid',
 df_features = pd.get_dummies(input_features, prefix=encode)
 encoded_freatures = df_features[1:]
 input_row = df_features[:1]
+
+
+#Encode Target (not needed at the moment)
+
+
+
+
+
+
+
+
+
+#Model training
+#clf = RandomForestClassifier()
+#clf.fit(encoded_freatures, Target) #encoded target if needed
+
+#Apply model for predictions
+#prediction = clf.predict(input_row)
+#prediction_proba = clf.predict_proba(input_row)
+
+
+#Predictions
+#with st.expander('Predictions'):
+#  st.write('**Probabilities**')
+#  prediction_proba
+#  st.write('**Final Prediction**')
+#  prediction
+
+
