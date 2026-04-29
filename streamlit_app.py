@@ -89,8 +89,8 @@ with st.expander('Data'):
   Features
 
   st.write('**Target**')
-  Target = input_features.target_input
-  Target
+  target_input
+  
 
 #Show Charts for the data---------add more charts
 with st.expander('Charts'):
