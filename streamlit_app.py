@@ -15,7 +15,8 @@ df = pd.read_csv('https://raw.githubusercontent.com/fireleaf22/Pipelines_ML_erga
 df_columns = list(df.columns)
 #target_input = st.selectbox('select target',df_columns)
 target_input = df.G3
-target_input
+
+
 ##Data preparations
 #Create sidebar for data input
 with st.sidebar:
@@ -83,12 +84,12 @@ with st.expander('Data'):
   df
 
   st.write('**Features**')
-  Features = input_features.drop(target_input, axis=1)
+  Features = input_features.drop('G3', axis=1) #target_input instead of G3
   Features
 
   st.write('**Target**')
-  target_input
-  
+  #target_input
+  G3
 
 #Show Charts for the data---------add more charts
 with st.expander('Charts'):
