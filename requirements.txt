@@ -1,7 +1,6 @@
-streamlit
-numpy #numerical processing
-pandas #data
-scikit-learn #machine learning
-matplotlib
-seaborn
-joblib
+streamlit # web app
+numpy # numerical processing
+pandas # data management
+scikit-learn # machine learning
+matplotlib #graphs
+seaborn #graphs
