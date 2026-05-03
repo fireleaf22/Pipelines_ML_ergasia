@@ -8,3 +8,18 @@ ML APP FOR PROJECT
 
 Made with Python
 All packages are in the requirements.txt file and ready to get installed when run.
+Else:
+  ```bash
+  pip install streamlit pandas numpy scikit-learn matplotlib seaborn
+
+# Dependancies:
+  Python 3.9+
+
+# How to run the app:
+  1) Have the student-por.csv in the same folder as app.py / or upload your csv file in the app
+  2) Run: streamlit run app.py
+  3) Open the link for the app that will appear
+
+  1) Έχουμε το αρχείο student-por.csv στον ίδιο φάκελο με το app.py / ή ανεβάζουμε το δικό μας csv αρχείο μέσα στο app
+  2) Τρέχουμε: streamlit run app.py
+  3) Ανοίγουμε τον σύνδεσμο του app που θα εμφανιστεί 
