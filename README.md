@@ -6,9 +6,12 @@ ML APP FOR PROJECT
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://test.streamlit.app/)
 
-Made with Python
+## Made with Python
+
 All packages are in the requirements.txt file and ready to get installed when run.
+
 Else run the following command on your terminal to install the required packages:
+
   pip install streamlit pandas numpy scikit-learn matplotlib seaborn
 
 # Dependancies:
