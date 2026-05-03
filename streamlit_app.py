@@ -1,25 +1,25 @@
 import streamlit as st #used for making the web app
 import pandas as pd #used for data management
-import numpy as np #used for data management
+import numpy as np #used for numerical operations
  
 from sklearn.model_selection import train_test_split #train/test split
 from sklearn.preprocessing import StandardScaler #scaling, encoding
-from sklearn.compose import ColumnTransformer #ColumnTransformer για συνδυασμό preprocessing
-from sklearn.pipeline import Pipeline #Pipeline για ενιαία ροή preprocessing + μοντέλου
-from sklearn.metrics import ( #μετρικές regression & classification
+from sklearn.compose import ColumnTransformer #ColumnTransformer for combining preprocessing
+from sklearn.pipeline import Pipeline #Pipeline for preprocessing + model
+from sklearn.metrics import ( #regression & classification metrics
     mean_squared_error,
     r2_score,
     accuracy_score,
     classification_report,
     confusion_matrix
 )
-from sklearn.impute import SimpleImputer #SimpleImputer για missing values
-from sklearn.preprocessing import OneHotEncoder #scaling, encoding
+from sklearn.impute import SimpleImputer #SimpleImputer for missing values
+from sklearn.preprocessing import OneHotEncoder #for scaling and encoding
 
-from sklearn.linear_model import LinearRegression, LogisticRegression #ML αλγόριθμοι
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier #ML αλγόριθμοι
-from sklearn.decomposition import PCA #PCA για μείωση διαστάσεων
-from sklearn.cluster import KMeans #KMeans clustering
+from sklearn.linear_model import LinearRegression, LogisticRegression #ML algorithms
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier #ML algorithms
+from sklearn.decomposition import PCA #PCA for dimensionality reduction (μείωση διαστάσεων)
+from sklearn.cluster import KMeans #KMeans clustering (oμαδοποίηση K-μέσων)
 
 import matplotlib.pyplot as plt #used for graphs
 import seaborn as sns #used for graphs
@@ -40,15 +40,15 @@ st.markdown("""
 """)
 
 # ---------------------------------------------------------
-# 1️⃣ Στάδιο 1: Φόρτωση Δεδομένων
+# 1️⃣ Στάδιο 1: Φόρτωση Δεδομένων / Upload Data
 # ---------------------------------------------------------
 
 st.header("1. Φόρτωση Δεδομένων & Προεπεξεργασία")
 
-# Επιτρέπει στον χρήστη να ανεβάσει CSV
+# Upload Csv by the user
 uploaded_file = st.file_uploader("Φόρτωσε το CSV (student-por.csv)", type=["csv"])
 
-# Αν δεν ανέβει αρχείο → προσπάθησε να φορτώσεις τοπικό
+# If no file was uploaded, then use the default csv
 if uploaded_file is None:
     st.info("Αν δεν ανεβάσεις αρχείο, θα χρησιμοποιηθεί το τοπικό 'student-por.csv' (αν υπάρχει).")
     try:
@@ -61,46 +61,48 @@ else:
     df = pd.read_csv(uploaded_file)
     st.success("Το dataset φορτώθηκε επιτυχώς!")
 
-# Προεπισκόπηση δεδομένων
+# Προεπισκόπηση δεδομένων / Preview Dataset
 st.subheader("Προεπισκόπηση")
 st.write("Διαστάσεις:", df.shape)
 st.dataframe(df.head())
 
-# Τύποι στηλών
+# Τύποι στηλών / Column types
 st.subheader("Τύποι στηλών")
 st.write(df.dtypes)
 
 # ---------------------------------------------------------
 # Επιλογή target & features
+# Choose target & features
 # ---------------------------------------------------------
 
 all_columns = df.columns.tolist()
 
-# Αν υπάρχει G3 → default target
+# G3 default target if it exists
 default_target = "G3" if "G3" in all_columns else all_columns[-1]
 
-# Επιλογή target από τον χρήστη
+# User selects target
 target_col = st.selectbox("Επίλεξε target variable", all_columns, index=all_columns.index(default_target))
 
-# Επιλογή features
+# User selects features
 feature_cols = st.multiselect(
     "Επίλεξε features (αν τα αφήσεις κενά, θα χρησιμοποιηθούν όλες οι υπόλοιπες στήλες)",
     [c for c in all_columns if c != target_col]
 )
 
-# Αν δεν επιλέξει τίποτα → όλα εκτός target
+# All exept target if user does not choose
 if len(feature_cols) == 0:
     feature_cols = [c for c in all_columns if c != target_col]
 
 st.write("**Target:**", target_col)
 st.write("**Features:**", feature_cols)
 
-# Δημιουργία X, y
+# Create X, y = features, target columns as input
 X = df[feature_cols].copy()
 y = df[target_col].copy()
 
 # ---------------------------------------------------------
 # Χωρισμός σε αριθμητικά & κατηγορικά features
+# Split numeric and categorical features
 # ---------------------------------------------------------
 
 numeric_features = X.select_dtypes(include=["int64", "float64"]).columns.tolist()
@@ -110,29 +112,29 @@ st.write("Αριθμητικά features:", numeric_features)
 st.write("Κατηγορικά features:", categorical_features)
 
 # ---------------------------------------------------------
-# Ρυθμίσεις Προεπεξεργασίας
+# Ρυθμίσεις Προεπεξεργασίας / Preprocessing settings
 # ---------------------------------------------------------
 
 st.subheader("Ρυθμίσεις Προεπεξεργασίας")
 
-# Επιλογή στρατηγικής για missing values
+# Choose strategy for missing values
 missing_strategy = st.selectbox(
     "Στρατηγική για ελλιπείς τιμές",
     ["mean", "median", "most_frequent", "constant"],
     index=0
 )
 
-# Επιλογή scaling
+# Choose scaling
 scale_numeric = st.checkbox("Κανονικοποίηση/Τυποποίηση αριθμητικών features (StandardScaler)", value=True)
 
-# Numeric transformer
+# Numeric transformer for missing values and scaling the data
 numeric_transformer_steps = [("imputer", SimpleImputer(strategy=missing_strategy))]
 if scale_numeric:
     numeric_transformer_steps.append(("scaler", StandardScaler()))
 
 numeric_transformer = Pipeline(steps=numeric_transformer_steps)
 
-# Categorical transformer
+# Categorical transformer for missing values and encoding categoric to numeric
 categorical_transformer = Pipeline(
     steps=[
         ("imputer", SimpleImputer(strategy="most_frequent")),
@@ -140,7 +142,7 @@ categorical_transformer = Pipeline(
     ]
 )
 
-# ColumnTransformer = συνδυάζει numeric + categorical preprocessing
+# ColumnTransformer = combine numeric + categorical preprocessing
 preprocessor = ColumnTransformer(
     transformers=[
         ("num", numeric_transformer, numeric_features),
@@ -151,39 +153,37 @@ preprocessor = ColumnTransformer(
 st.success("Ορίστηκε preprocessor (impute + encoding + scaling).")
 
 # ---------------------------------------------------------
-# 2️⃣ Στάδιο 2: EDA
+# 2️⃣ Στάδιο 2: Διερευνητική Ανάλυση / EDA
 # ---------------------------------------------------------
 
 st.header("2. Διερευνητική Ανάλυση (EDA)")
 
-# Tabs για EDA
+# Tabs for EDA
 eda_tab1, eda_tab2, eda_tab3 = st.tabs(["Κατανομές", "Συσχετίσεις", "PCA 2D"])
 
 # ---------------------------------------------------------
-# TAB 1: Κατανομές
+# TAB 1: Κατανομές / Distributions
 # ---------------------------------------------------------
 
 with eda_tab1:
     st.subheader("Κατανομές Features")
     col_to_plot = st.selectbox("Επίλεξε στήλη για histogram/boxplot", all_columns)
 
-    if pd.api.types.is_numeric_dtype(df[col_to_plot]):
-        # Histogram + Boxplot για αριθμητικά
+    if pd.api.types.is_numeric_dtype(df[col_to_plot]):            # Histogram + Boxplot (spread, skewness, outliers) if numerical
         fig, ax = plt.subplots(1, 2, figsize=(10, 4))
         sns.histplot(df[col_to_plot].dropna(), kde=True, ax=ax[0])
         ax[0].set_title(f"Histogram of {col_to_plot}")
         sns.boxplot(x=df[col_to_plot], ax=ax[1])
         ax[1].set_title(f"Boxplot of {col_to_plot}")
         st.pyplot(fig)
-    else:
-        # Bar plot για κατηγορικά
+    else:                                                          # Barplot if categorical
         fig, ax = plt.subplots(figsize=(6, 4))
         df[col_to_plot].value_counts().plot(kind="bar", ax=ax)
         ax.set_title(f"Counts of {col_to_plot}")
         st.pyplot(fig)
 
 # ---------------------------------------------------------
-# TAB 2: Correlation Heatmap
+# TAB 2: Correlation Heatmap / Θερμικός Χάρτης Συσχέτισης
 # ---------------------------------------------------------
 
 with eda_tab2:
@@ -199,7 +199,7 @@ with eda_tab2:
         st.write("Δεν υπάρχουν αρκετές αριθμητικές στήλες για heatmap.")
 
 # ---------------------------------------------------------
-# TAB 3: PCA 2D
+# TAB 3: PCA 2D (Principal Component Analysis) / Ανάλυση Κύριων Συνιστωσών 
 # ---------------------------------------------------------
 
 with eda_tab3:
@@ -232,28 +232,28 @@ st.header("3. ML Pipeline")
 ml_tab1, ml_tab2, ml_tab3 = st.tabs(["Regression (G3)", "Classification (Pass/Fail)", "Clustering (KMeans)"])
 
 # ---------------------------------------------------------
-# TAB 1: Regression
+# TAB 1: Regression / Οπισθοδρόμηση
 # ---------------------------------------------------------
 
 with ml_tab1:
     st.subheader("Regression για πρόβλεψη του G3")
 
-    # Προειδοποίηση αν target != G3
+    # Warning if target != G3
     if target_col != "G3":
         st.info("Για πιο λογική regression, συνήθως target = G3. Παρ' όλα αυτά, θα τρέξουμε με το επιλεγμένο target.")
 
-    # Επιλογές train/test split
+    # Choose train/test split
     test_size = st.slider("Test size (ποσοστό test set)", 0.1, 0.5, 0.2, 0.05)
     random_state = st.number_input("Random state", min_value=0, max_value=999, value=42, step=1)
 
-    # Χωρισμός δεδομένων
+    # Split data into train and test
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=test_size, random_state=random_state
     )
 
     st.write("Train shape:", X_train.shape, "Test shape:", X_test.shape)
 
-    # Επιλογή regression μοντέλου
+    # Choose regression Model
     reg_model_name = st.selectbox("Επίλεξε regression αλγόριθμο", ["LinearRegression", "RandomForestRegressor"])
 
     if reg_model_name == "LinearRegression":
@@ -275,12 +275,12 @@ with ml_tab1:
         ]
     )
 
-    # Εκτέλεση Regression
+    # Run Regression
     if st.button("Τρέξε Regression"):
         reg_pipeline.fit(X_train, y_train)
         y_pred = reg_pipeline.predict(X_test)
 
-        # Μετρικές
+        # Μετρικές / Metrics
         rmse = np.sqrt(mean_squared_error(y_test, y_pred))
         r2 = r2_score(y_test, y_pred)
 
@@ -297,16 +297,17 @@ with ml_tab1:
         st.pyplot(fig)
 
 # ---------------------------------------------------------
-# TAB 2: Classification
+# TAB 2: Classification / Ταξινόμηση
 # ---------------------------------------------------------
 
 with ml_tab2:
     st.subheader("Classification – Pass/Fail από G3")
 
+    #Check if G3 exists
     if "G3" not in df.columns:
         st.warning("Δεν υπάρχει στήλη G3 για να ορίσουμε pass/fail.")
     else:
-        # Δημιουργία binary target
+        # Create binary target for pass/fail
         y_class = (df["G3"] >= 10).astype(int)
         st.write("0 = fail, 1 = pass")
 
@@ -317,7 +318,7 @@ with ml_tab2:
             X_class, y_class, test_size=0.2, random_state=42
         )
 
-        # Επιλογή classification μοντέλου
+        # Choose Classification Model
         clf_model_name = st.selectbox("Επίλεξε classification αλγόριθμο", ["LogisticRegression", "RandomForestClassifier"])
 
         if clf_model_name == "LogisticRegression":
@@ -340,7 +341,7 @@ with ml_tab2:
             ]
         )
 
-        # Εκτέλεση Classification
+        # Run Classification
         if st.button("Τρέξε Classification"):
             clf_pipeline.fit(X_train_c, y_train_c)
             y_pred_c = clf_pipeline.predict(X_test_c)
@@ -369,15 +370,15 @@ with ml_tab2:
 with ml_tab3:
     st.subheader("Unsupervised Clustering – KMeans")
 
-    # Χρησιμοποιούμε μόνο αριθμητικά features
+    # Use only numerical features
     num_X = df[numeric_features].dropna()
 
     if num_X.shape[1] < 2:
         st.write("Χρειάζονται τουλάχιστον 2 αριθμητικά features για clustering.")
     else:
-        n_clusters = st.slider("Αριθμός clusters (k)", 2, 10, 3, 1)
+        n_clusters = st.slider("Αριθμός clusters (k)", 2, 10, 3, 1)  #choose how many clusters
 
-        # Scaling για clustering
+        # Scaling for clustering
         scaler_clust = StandardScaler()
         X_scaled = scaler_clust.fit_transform(num_X)
 
@@ -387,14 +388,14 @@ with ml_tab3:
 
         st.write("Cluster counts:", pd.Series(labels).value_counts())
 
-        # PCA για visualization
+        # PCA for visualization
         pca_clust = PCA(n_components=2)
         X_pca_clust = pca_clust.fit_transform(X_scaled)
 
         pca_df = pd.DataFrame(X_pca_clust, columns=["PC1", "PC2"])
         pca_df["cluster"] = labels
 
-        # Scatter plot
+        # Scatter plot for visualization of the groups/clusters
         fig, ax = plt.subplots(figsize=(6, 5))
         sns.scatterplot(
             data=pca_df,
