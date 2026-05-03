@@ -8,8 +8,7 @@ ML APP FOR PROJECT
 
 Made with Python
 All packages are in the requirements.txt file and ready to get installed when run.
-Else:
-  ```bash
+Else run the following command on your terminal to install the required packages:
   pip install streamlit pandas numpy scikit-learn matplotlib seaborn
 
 # Dependancies:
