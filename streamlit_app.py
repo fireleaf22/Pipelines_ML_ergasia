@@ -3,7 +3,7 @@ import pandas as pd #used for data management
 import numpy as np #used for numerical operations
  
 from sklearn.model_selection import train_test_split #train/test split
-from sklearn.preprocessing import StandardScaler #scaling, encoding
+from sklearn.preprocessing import StandardScaler #for scaling and encoding
 from sklearn.compose import ColumnTransformer #ColumnTransformer for combining preprocessing
 from sklearn.pipeline import Pipeline #Pipeline for preprocessing + model
 from sklearn.metrics import ( #regression & classification metrics
@@ -14,7 +14,7 @@ from sklearn.metrics import ( #regression & classification metrics
     confusion_matrix
 )
 from sklearn.impute import SimpleImputer #SimpleImputer for missing values
-from sklearn.preprocessing import OneHotEncoder #for scaling and encoding
+from sklearn.preprocessing import OneHotEncoder #for scaling and encoding categorical
 
 from sklearn.linear_model import LinearRegression, LogisticRegression #ML algorithms
 from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier #ML algorithms
