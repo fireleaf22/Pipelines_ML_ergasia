@@ -2,7 +2,7 @@
 
 ML APP FOR PROJECT
 
-## Demo App
+## This is the link for the Demo App on Streamlit
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://test.streamlit.app/)
 
